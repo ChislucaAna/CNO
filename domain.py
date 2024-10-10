@@ -2,8 +2,26 @@ import math
 
 class Complex:
     def __init__(self, real=0, imaginar=0):
-        self.real = real
-        self.imaginar = imaginar
+        if isinstance(real, str):
+            self.real, self.imaginar = self.from_string(real)
+        else:
+            self.real = real
+            self.imaginar = imaginar
+    
+    @staticmethod
+    def from_string(s): #metodele statice nu au referinta self si nu lucreaza cu obiecte din acea clasa
+        #scoatem spatiile extra din string pt parsare mai usoara
+        s = s.replace(" ", "").rstrip('i')
+        #gaseste minus sau plus
+        last_plus = s.rfind('+')
+        last_minus = s.rfind('-')
+        #determina pozitia de split
+        split_pos = max(last_plus, last_minus)
+        #totul inainte de pozitia de split e partea reala, totul dupa e imaginar
+        real_part = s[:split_pos]
+        imag_part = s[split_pos:]
+        #converteste in int cele doua parti pt a creea instanta
+        return int(real_part), int(imag_part)
 
     def __add__(self, other):
         sumareal = self.real + other.real
