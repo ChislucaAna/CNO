@@ -2,6 +2,8 @@ import unittest
 import math
 from domain import Complex
 
+#teste pentru operatii intre 2 instante de tip complex
+
 class TestComplex(unittest.TestCase):
 
     def setUp(self): # numerele folosite in cadrul testelor
@@ -11,7 +13,7 @@ class TestComplex(unittest.TestCase):
         self.c3 = Complex(0, 0)   # 0 + 0i
         self.c4 = Complex(-1, 1)  # -1 + 1i
 
-    #functiile de tipul self.asserEqual verifica validitatea operatiilor
+    #functiile de tipul self.assertEqual verifica validitatea operatiilor
 
     def test_add(self):
         """Test addition of complex numbers."""

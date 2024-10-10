@@ -24,28 +24,61 @@ class Complex:
         return int(real_part), int(imag_part)
 
     def __add__(self, other):
-        sumareal = self.real + other.real
-        sumaimaginar = self.imaginar + other.imaginar
-        return Complex(sumareal, sumaimaginar)
+        if isinstance(other, Complex):
+            return Complex(self.real + other.real, self.imaginar + other.imaginar)
+        elif isinstance(other, (int, float)):
+            return Complex(self.real + other, self.imaginar)
+        else:
+            return NotImplemented
+
+    def __radd__(self, other):
+        if isinstance(other, (int, float)):
+            return Complex(other + self.real, self.imaginar)
+        return NotImplemented
        
     def __sub__(self, other):
-        diffreal = self.real - other.real
-        diffimaginar = self.imaginar - other.imaginar
-        return Complex(diffreal, diffimaginar)
+        if isinstance(other, Complex):
+            return Complex(self.real - other.real, self.imaginar - other.imaginar)
+        elif isinstance(other, (int, float)):
+            return Complex(self.real - other, self.imaginar)
+        else:
+            return NotImplemented
+
+    def __rsub__(self, other):
+        if isinstance(other, (int, float)):
+            return Complex(other - self.real, -self.imaginar)
+        return NotImplemented
 
     def __mul__(self, other):
-        mulreal = self.real * other.real - self.imaginar * other.imaginar
-        mulimaginar = self.real * other.imaginar + self.imaginar * other.real
-        return Complex(mulreal, mulimaginar)
+        if isinstance(other, Complex):
+            return Complex(self.real * other.real - self.imaginar * other.imaginar,
+                           self.real * other.imaginar + self.imaginar * other.real)
+        elif isinstance(other, (int, float)):
+            return Complex(self.real * other, self.imaginar * other)
+        else:
+            return NotImplemented
+
+    def __rmul__(self, other):
+        if isinstance(other, (int, float)):
+            return Complex(self.real * other, self.imaginar * other)
+        return NotImplemented
 
     def __truediv__(self, other):
-        numitor = other.real ** 2 + other.imaginar ** 2
-        if numitor != 0:
-            divreal = (self.real * other.real + self.imaginar * other.imaginar) / numitor
-            divimaginar = (self.imaginar * other.real - self.real * other.imaginar) / numitor
-            return Complex(divreal, divimaginar)
-        else:
-            raise ZeroDivisionError("Cannot divide by zero complex number")
+        if isinstance(other, Complex):
+            numitor = other.real ** 2 + other.imaginar ** 2
+            if numitor != 0:
+                return Complex((self.real * other.real + self.imaginar * other.imaginar) / numitor,
+                               (self.imaginar * other.real - self.real * other.imaginar) / numitor)
+        elif isinstance(other, (int, float)) and other != 0:
+            return Complex(self.real / other, self.imaginar / other)
+
+        return NotImplemented
+
+    def __rtruediv__(self, other):
+        if isinstance(other, (int, float)) and other != 0:
+            return Complex(other * self.real / (self.real ** 2 + self.imaginar ** 2),
+                           -other * self.imaginar / (self.real ** 2 + self.imaginar ** 2))
+        return NotImplemented
 
     def __str__(self):
         return f"{self.real} + {self.imaginar}i"
@@ -55,5 +88,3 @@ class Complex:
 
     def __abs__(self):
         return math.sqrt(self.real ** 2 + self.imaginar ** 2)
-
-
