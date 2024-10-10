@@ -24,10 +24,8 @@ class TestQuadraticSolverWithComplex(unittest.TestCase):
 
     def test_complex_coefficients(self):
         x1, x2 = self.solver.solve_quadratic(Complex(1, 1), Complex(2, 2), Complex(1, 1))
-        # This would require calculation. You should determine what you expect here.
-        # This example assumes hypothetical roots.
-        expected_root1 = Complex(-1, 1)  # Hypothetical root
-        expected_root2 = Complex(-1, -1)  # Hypothetical root
+        expected_root1 = Complex(-1, 0)
+        expected_root2 = Complex(-1, 0)
         self.assertEqual(x1, expected_root1)
         self.assertEqual(x2, expected_root2)
 

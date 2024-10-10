@@ -20,7 +20,7 @@ class TestComplexFromString(unittest.TestCase):
         }
 
         #pentru fiecare input si output el ruleaza functia si vede daca corespunde outputului asteptat.
-        #creeaza un subtest. daca el esueaza o sa le execute si pe urmatoarele, afisand outputul tuturor
+        # sintagma with creeaza un subtest. daca el esueaza o sa le execute si pe urmatoarele, afisand outputul tuturor
         for input_str, expected in test_cases.items():
             with self.subTest(input=input_str):
                 real, imag = Complex.from_string(input_str)

@@ -13,7 +13,7 @@ class TestComplex(unittest.TestCase):
         self.c3 = Complex(0, 0)   # 0 + 0i
         self.c4 = Complex(-1, 1)  # -1 + 1i
 
-    #functiile de tipul self.assertEqual verifica validitatea operatiilor
+    #functiile de tipul self.assertEqual verifica validitatea operatiilor pe baza functiei __eq__ definita din clasa
 
     def test_add(self):
         """Test addition of complex numbers."""

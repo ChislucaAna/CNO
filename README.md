@@ -1,2 +1,2 @@
-python -m unittest discover -s tests
-ruleaza asta in rootul proiectului
+python -m unittest tests/testul_pe_care_il_vrei.py
+-pentru testare.
